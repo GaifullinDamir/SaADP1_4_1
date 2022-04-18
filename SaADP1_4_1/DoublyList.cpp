@@ -3,47 +3,100 @@
 
 void init(DoublyList*& pHead)
 {
-	pHead->pPrevious = pHead;
-	pHead->pNext = pHead;
+	pHead->previous = pHead;
+	pHead->next = pHead;
 }
 
 bool isEmpty(DoublyList* pHead)
 {
-	return (pHead->pNext == pHead->pPrevious);
+	return (pHead->next == pHead->previous);
 }
 
-bool forwardSearch(DoublyList* pHead, DoublyList*& pPrevious, DoublyList*& pCurrent, int searchedData)
+bool searchForward(DoublyList* pHead, DoublyList*& pCurrent, int searchedData)
 {
-	pPrevious = pHead;
-	pCurrent = pHead->pNext;
+	pCurrent = pHead->next;
 	while (pCurrent != pHead)
 	{
 		if (pCurrent->data == searchedData) { return true; }
-		pPrevious = pCurrent;
-		pCurrent = pCurrent->pNext;
+		pCurrent = pCurrent->next;
 	}
 	if (pCurrent == pHead) { return false; }
 }
 
-bool searchBackward(DoublyList* pHead, DoublyList*& pPrevious, DoublyList*& pCurrent, int searchedData)
+bool searchBackward(DoublyList* pHead, DoublyList*& pCurrent, int searchedData)
 {
-	pPrevious = pHead->pPrevious->pPrevious;
-	pCurrent = pHead->pPrevious;
+	pCurrent = pHead->previous;
 	while (pCurrent != pHead)
 	{
 		if (pCurrent->data == searchedData) { return true; }
-		pPrevious = pCurrent;
-		pCurrent = pCurrent->pPrevious;
+		pCurrent = pCurrent->previous;
 	}
 	if (pCurrent == pHead) { return false; }
 }
 
 void deleteItem(DoublyList* pHead, DoublyList*& pCurrent)
 {
-	pCurrent->pPrevious->pNext = pCurrent->pNext;
-	pCurrent->pNext->pPrevious = pCurrent->pPrevious;
+	pCurrent->previous->next = pCurrent->next;
+	pCurrent->next->previous = pCurrent->previous;
 	delete pCurrent;
 	pCurrent = nullptr;
 }
 
 void addAfter(DoublyList*& pHead, DoublyList*& pCurrent, int data)
+{
+	if (isEmpty(pHead))
+	{
+		DoublyList* pAdded = new DoublyList;
+		pAdded->data = data;
+		pAdded->next = pHead;
+		pAdded->previous = pHead;
+		pHead->next = pAdded;
+		pHead->previous = pAdded;
+	}
+	DoublyList* pTemporary = new DoublyList;
+	pTemporary->data = data;
+	pTemporary->next = pCurrent->next;
+	pTemporary->previous = pCurrent;
+	pCurrent->next->previous = pTemporary;
+	pCurrent->next = pTemporary;
+}
+
+void addBefore(DoublyList*& pHead, DoublyList*& pCurrent, int data)
+{
+	DoublyList* pTemporary = new DoublyList;
+	pTemporary->data = data;
+	pTemporary->next = pCurrent;
+	pTemporary->previous = pCurrent->previous;
+	pCurrent->previous->next = pTemporary;
+	pCurrent->previous = pTemporary;
+}
+
+void showForward(DoublyList* pHead)
+{
+	if (!isEmpty(pHead))
+	{
+		DoublyList* pCurrent = pHead->next;
+		while (pCurrent != pHead)
+		{
+			std::cout << "   " << pCurrent->data << std::endl;
+			pCurrent = pCurrent->next;
+		}
+		std::cout << std::endl;
+	}
+	else std::cout << "List is empty." << std::endl;
+}
+
+void showBackward(DoublyList* pHead)
+{
+	if (!isEmpty(pHead))
+	{
+		DoublyList* pCurrent = pHead->previous;
+		while (pCurrent != pHead)
+		{
+			std::cout << "   " << pCurrent->data << std::endl;
+			pCurrent = pCurrent->previous;
+		}
+		std::cout << std::endl;
+	}
+	else std::cout << "List is empty." << std::endl;
+}

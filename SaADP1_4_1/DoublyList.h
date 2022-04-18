@@ -2,11 +2,15 @@
 struct DoublyList
 {
 	int data;
-	DoublyList* pNext, *pPrevious;
+	DoublyList* next, *previous;
 };
 
 void init(DoublyList*& pHead);
 bool isEmpty(DoublyList* pHead);
-bool searchForward(DoublyList* pHead, DoublyList*& pPrevious, DoublyList*& pCurrent, int searchedData);
-bool searchBackward(DoublyList* pHead, DoublyList*& pPrevious, DoublyList*& pCurrent, int searchedData);
+bool searchForward(DoublyList* pHead, DoublyList*& pCurrent, int searchedData);
+bool searchBackward(DoublyList* pHead, DoublyList*& pCurrent, int searchedData);
 void deleteItem(DoublyList* pHead, DoublyList*& pCurrent);
+void addAfter(DoublyList*& pHead, DoublyList*& pCurrent, int data);
+void addBefore(DoublyList*& pHead, DoublyList*& pCurrent, int data);
+void showForward(DoublyList* pHead);
+void showBackward(DoublyList* pHead);
