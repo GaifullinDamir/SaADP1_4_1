@@ -14,3 +14,4 @@ void addAfter(DoublyList*& pHead, DoublyList*& pCurrent, int data);
 void addBefore(DoublyList*& pHead, DoublyList*& pCurrent, int data);
 void showForward(DoublyList* pHead);
 void showBackward(DoublyList* pHead);
+void clearMemory(DoublyList*& pHead);

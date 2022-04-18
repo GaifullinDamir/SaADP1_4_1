@@ -34,7 +34,7 @@ bool searchBackward(DoublyList* pHead, DoublyList*& pCurrent, int searchedData)
 	if (pCurrent == pHead) { return false; }
 }
 
-void deleteItem(DoublyList* pHead, DoublyList*& pCurrent)
+void deleteItem(DoublyList*& pCurrent)
 {
 	pCurrent->previous->next = pCurrent->next;
 	pCurrent->next->previous = pCurrent->previous;
@@ -99,4 +99,16 @@ void showBackward(DoublyList* pHead)
 		std::cout << std::endl;
 	}
 	else std::cout << "List is empty." << std::endl;
+}
+
+void clearMemory(DoublyList*& pHead)
+{
+	DoublyList* pCurrent = nullptr;
+
+	while (pCurrent != pHead)
+	{
+		deleteItem(pCurrent);
+		pCurrent = pCurrent->next;
+	}
+	pHead = nullptr;
 }
