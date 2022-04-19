@@ -9,7 +9,7 @@ void init(DoublyList*& pHead)
 
 bool isEmpty(DoublyList* pHead)
 {
-	return (pHead->next == pHead->previous);
+	return (pHead->next == pHead && pHead->previous == pHead);
 }
 
 bool searchForward(DoublyList* pHead, DoublyList*& pCurrent, int searchedData)
@@ -53,12 +53,15 @@ void addAfter(DoublyList*& pHead, DoublyList*& pCurrent, int data)
 		pHead->next = pAdded;
 		pHead->previous = pAdded;
 	}
-	DoublyList* pTemporary = new DoublyList;
-	pTemporary->data = data;
-	pTemporary->next = pCurrent->next;
-	pTemporary->previous = pCurrent;
-	pCurrent->next->previous = pTemporary;
-	pCurrent->next = pTemporary;
+	else
+	{
+		DoublyList* pTemporary = new DoublyList;
+		pTemporary->data = data;
+		pTemporary->next = pCurrent->next;
+		pTemporary->previous = pCurrent;
+		pCurrent->next->previous = pTemporary;
+		pCurrent->next = pTemporary;
+	}
 }
 
 void addBefore(DoublyList*& pHead, DoublyList*& pCurrent, int data)

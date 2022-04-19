@@ -72,25 +72,29 @@ void workWithUser(DoublyList*& pHead)
 		int option = userInput();
 		switch (option)
 		{
-		case(AddItem):
-		{
-			caseAddItem(pHead);
-			break;
-		}
-		case(DeleteItem):
-		{
-			caseDeleteItem(pHead);
-			break;
-		}
-		case(Show):
-			caseShow(pHead);
-			break;
-		case(Exit):
-			work = false;
-			break;
-		default:
-			std::cout << "   There is no such menu item." << std::endl;
-			break;
+			case(AddItem):
+			{
+				caseAddItem(pHead);
+				break;
+			}
+			case(DeleteItem):
+			{
+				caseDeleteItem(pHead);
+				break;
+			}
+			case(Show):
+			{
+				caseShow(pHead);
+				break;
+			}
+			case(Exit):
+			{
+				work = false;
+				break;
+			}
+			default:
+				std::cout << "   There is no such menu item." << std::endl;
+				break;
 		}
 	}
 }
@@ -119,8 +123,10 @@ void caseAddItem(DoublyList*& pHead)
 		{
 			case(Forward):
 				check = searchForward(pHead, pCurrent, currentData);
+				break;
 			case(Backward):
 				check = searchBackward(pHead, pCurrent, currentData);
+				break;
 			default:
 				std::cout << "   There is no such menu item." << std::endl;
 				break;
@@ -174,15 +180,17 @@ void caseDeleteItem(DoublyList*& pHead)
 	{
 	case(Forward):
 		check = searchForward(pHead, pCurrent, currentData);
+		break;
 	case(Backward):
 		check = searchBackward(pHead, pCurrent, currentData);
+		break;
 	default:
 		std::cout << "   There is no such menu item." << std::endl;
 		break;
 	}
 	if (check)
 	{
-		deleteItem(pHead, pCurrent);
+		deleteItem(pCurrent);
 		std::cout << std::endl;
 		std::cout << "   Item deleted." << std::endl;
 		std::cout << std::endl;
