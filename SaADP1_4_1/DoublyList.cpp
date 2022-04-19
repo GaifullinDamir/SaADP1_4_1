@@ -106,7 +106,7 @@ void showBackward(DoublyList* pHead)
 
 void clearMemory(DoublyList*& pHead)
 {
-	DoublyList* pCurrent = nullptr;
+	DoublyList* pCurrent = pHead;
 
 	while (pCurrent != pHead)
 	{
